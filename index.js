@@ -11,6 +11,7 @@ const axios = require('axios');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+var shortDateFormat = "ddd @ h:mmA"; // this is just an example of storing a date format once so you can change it in one place and have it propagate
 
 app.use(function(req, res, next) {
     res.io = io;
@@ -50,6 +51,9 @@ app.use('/webchat', require('./controllers/webchat'));
 app.use('/messages', require('./controllers/message'));
 // app.use('/stock', require('./controllers/stock'));
 // app.use('/search', require('./controllers/search'));
+
+app.locals.moment = moment; // this makes moment available as a variable in every EJS page
+app.locals.shortDateFormat = shortDateFormat;
 
 // Routes
 app.get('/', (req, res) => {

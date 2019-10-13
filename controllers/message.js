@@ -4,6 +4,8 @@ let db = require('../models');
 const OP = require('sequelize/lib/operators');
 // GET /appointment
 
+
+
 router.get('/', isLoggedIn, (req, res) => {
     res.render('chat/message', {
         userId: req.user.id
