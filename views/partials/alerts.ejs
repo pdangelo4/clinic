@@ -1,0 +1,23 @@
+<% if (alerts && alerts.error) { %>
+  <div class="errorBox">
+    <h2>Error:</h2>
+    <hr>
+    <% alerts.error.forEach(message => { %>
+      <p><%= message %></p>
+    <% }) %>
+  </div>
+<% } %>
+
+<% if (alerts && alerts.success) { %>
+
+  <div class="successBox">
+
+    <h2>Success:</h2>
+    <hr>
+
+    <% alerts.success.forEach(message => { %>
+      
+      <p><%= message %></p>
+    <% }) %>
+  </div>
+<% } %>

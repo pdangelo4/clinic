@@ -1,0 +1,32 @@
+<html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css">
+
+<body >
+  <h1 id="profileHeader"><%= currentUser.firstname %>'s Profile Page</h1>
+
+  <div class="boxContainer">
+    <div class="left">
+      <img class="name" src="<%= currentUser.profile %>" alt="user profile pic">
+      <p class="name"><strong></strong> <%= currentUser.firstname %> <%= currentUser.lastname %></p>
+      <p class="name"><strong>Admin?</strong> <%= currentUser.admin ? 'Yes' : 'No' %></p>
+    </div>
+    <div class="right">
+      <p>
+        <!-- Name: <%= currentUser.firstname %> <%= currentUser.lastname %>
+        <br>
+        <br> -->
+        Birthdate: <%= moment(currentUser.birthday).format('MMM do YYYY') %> 
+        <br>
+        <br>
+        Email: <%= currentUser.email %>!
+
+     
+      <!-- <hr> -->
+
+
+    </div>
+  </div>
+
+</body>
+
+</html>

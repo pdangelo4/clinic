@@ -1,0 +1,94 @@
+<div class="webchat">
+    <div>
+        Status: <span id="webchat-status" style="color: rgb(245, 7, 7)">Loading...</span>
+    </div>
+    <br>
+    <div>My Video ID: <span id="webchat-id">...</span></div>
+    <div>
+        <p>Enter ID of the User you want to video chat with:</p>
+        <input type="text" id="webchat-dial" placeholder="Video ID" />
+        <button type="button" id="webchat-btn-call">Call</button>
+    </div>
+    <br>
+    <div>
+        <div style="width: 800px;height: 500px;" id="video-display"></div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.26.1.js"></script>
+,<script src="/js/webrtc.js"></script>
+<script src=".env"></script>
+<script type="text/javascript">
+    var videoDisplay = document.getElementById('video-display');
+
+    function initWebChat(number) {
+        updateStatus('Connecting', 'orange');
+
+        var phone = (window.phone = PHONE({
+            number: number, // listen on this line
+            media: { video: { width: 640, height: 480 }, audio: true }, // <--- Set Camera Resolution
+            publish_key: '<%= process.env.publish_key %>',
+            subscribe_key: '<%= process.env.subscribe_key %>'
+        }));
+
+        phone.ready(function() {
+            updateStatus('Ready', 'green');
+        });
+        phone.receive(function(session) {
+            updateStatus('Connected', 'blue');
+            session.connected(connected);
+            session.ended(ended);
+        });
+
+        //btns
+        $('#webchat-btn-call').click(function() {
+            var number = $('#webchat-dial').val();
+            if (!number) alert('No number!');
+            updateStatus('Dialing....', 'yellow');
+            dial(number);
+        });
+    }
+    function updateStatus(status, color) {
+        $('#webchat-status')
+            .css({ color: color || 'green' })
+            .text(status);
+    }
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    // Video Session Connected
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    function connected(session) {
+        videoDisplay.innerHTML = '';
+        videoDisplay.appendChild(session.video);
+        showModal(true);
+    }
+
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    // Video Session Ended
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    function ended(session) {
+        updateStatus('Ready', 'green');
+        videoDisplay.innerHTML = '';
+    }
+    function dial(number) {
+        // Hangup an old call
+        phone.hangup();
+
+        // Dial Number
+        var session = phone.dial(number);
+
+        // No Dupelicate Dialing Allowed
+        if (!session) return;
+    }
+
+    function showModal(val) {
+        if (val) $('a[rel="modal:open"]').click();
+        else $('a[rel="modal:close"]').click();
+    }
+</script>
+
+<script>
+    var username = '<%= user.id %>';
+    $('#webchat-id').text(username);
+    initWebChat(username);
+</script>

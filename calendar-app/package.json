@@ -1,0 +1,9 @@
+{
+  "name": "calendar-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "create-react-app": "^3.2.0"
+  }
+}

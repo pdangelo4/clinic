@@ -1,0 +1,111 @@
+<div>
+    <div>
+       <p class="messageIds">Your ID Number: <%= userId %></p>
+    </div>
+    <br>
+    <div class="messageIds">
+        <label for="to">
+                Send Message To...
+            <input type="text" id="recipient" placeholder="Insert Recipient ID.."/>
+            <button type="button" id="chatHistory">Enter Chat Room!</button>
+        </label>
+    </div>
+    <div class="prevChatBox">
+        <!-- previous chats boxes -->
+        <ul id="chats"></ul>
+    </div>
+</div>
+    <div class="chatDiv">
+        <textarea id="chatInput" autocomplete="on" placeholder="Type your message here!"></textarea>
+           <button type="button" id="messageSubmit">
+            Submit
+        </button>
+    </div>
+
+
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="/js/jquery.js"></script>
+
+<script>
+    var userId = '<%= userId %>';
+    var messageArr = [];
+    $(function() {
+        var socketIO = io(window.location.origin, { transports: ['websocket'] });
+
+        $('#chatHistory').click(function() {
+            //ubdates the value of the to id to whoever the recipient is!
+            var to = $('#recipient').val();
+            if (!to) return alert('Empty target user');
+            console.log(to);
+
+            //Ajax request to pull message history
+            $.ajax({
+                type: 'get',
+                url: '/messages/history?to=' + to,
+                dataType: 'json',
+                success: function(data) {
+                    data = data || [];
+                    messageArr.unshift(data);
+                    data.reverse().map(function(mes) {
+                        $('#chats').prepend(chatTemplate(mes));
+                    });
+                }
+            });
+        });
+
+        $('#messageSubmit').click(function() {
+            //text inputed in the Chat
+            var text = $('#chatInput').val();
+            var to = $('#recipient').val();
+            console.log({
+                text
+            });
+
+            $.ajax({
+                type: 'post',
+                url: '/messages',
+                data: {
+                    from: userId,
+                    to: to,
+                    message: text
+                },
+                dataType: 'json',
+                success: function(data) {
+                    $('#chatInput').val('');
+                }
+            });
+        });
+
+        function chatTemplate(data) {
+
+            if (userId == data.from) {
+            return $(
+
+                '<li id="previousMessages"><span>' + 
+                    data.from + '</span> ' + '[' +
+                    data.createdAt + ']:' + ' ' + ' ' + ' ' + data.message + '</li>' + '<br>'
+            );
+                }
+            else {
+                return $(
+
+                '<li id="previousMessages2"><span>' + 'Message From #' + ' ' +
+                    data.from + '</span> ' + '[' +
+                    data.createdAt + ']:' + ' ' + ' ' + ' ' + data.message + '</li>' + '<br>'
+            );
+            }
+        }
+        socketIO.on('chat/' + userId, function(data) {
+            messageArr.push(data);
+            $('#chats').append(chatTemplate(data));
+        });
+
+        function showMessages() {
+            messageArr.map(function(m) {
+                $('#chats').append(chatTemplate(m));
+            });
+        }
+
+        
+    });
+</script>

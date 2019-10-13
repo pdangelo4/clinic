@@ -1,0 +1,70 @@
+<style>
+    #loading {
+        display: none;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    #calendar-app {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+</style>
+<div id="calendar-form" class="modal">
+    <p>Create Event</p>
+    <div>
+        <label>
+            Title:
+            <input id="c-title" type="text" />
+        </label>
+    </div>
+    <div>
+        <label>
+            Start Date:
+            <input id="c-startDate" type="datetime-local" />
+        </label>
+    </div>
+    <div>
+        <label>
+            End Date:
+            <input id="c-endDate" type="datetime-local" />
+        </label>
+    </div>
+    <div>
+        <button type="button" id="calendar-btn-save">Save</button>
+        <span>|</span>
+        <button style="color: red" type="button" id="calendar-btn-remove">
+            Delete
+        </button>
+
+        <a href="#calendar-form" rel="modal:close">Close</a>
+    </div>
+</div>
+
+<div id="calendar-app"></div>
+
+<link href="/js/fullcalendar-4.3.1/packages/core/main.css" rel="stylesheet" />
+<link
+    href="/js/fullcalendar-4.3.1/packages/daygrid/main.css"
+    rel="stylesheet"
+/>
+<link
+    href="/js/fullcalendar-4.3.1/packages/timegrid/main.css"
+    rel="stylesheet"
+/>
+<link href="/js/fullcalendar-4.3.1/packages/list/main.css" rel="stylesheet" />
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"
+/>
+
+<script src="/js/fullcalendar-4.3.1/packages/core/main.js"></script>
+<script src="/js/fullcalendar-4.3.1/packages/interaction/main.js"></script>
+<script src="/js/fullcalendar-4.3.1/packages/daygrid/main.js"></script>
+<script src="/js/fullcalendar-4.3.1/packages/timegrid/main.js"></script>
+<script src="/js/fullcalendar-4.3.1/packages/list/main.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/jquery-dateformat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<script src="/js/appointment.js"></script>
