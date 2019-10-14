@@ -1,5 +1,10 @@
 # clinic
 
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Setup](#setup)
+
 The purpose of this application is to allow patients of private practive clinics to schedule appointments, 
 write messages, and even video chat with their providers.
 
