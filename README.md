@@ -3,12 +3,19 @@
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
+* [Third Party Features] (#Third-Party-Features)
 * [Setup](#setup)
+
+
+## General info
 
 The purpose of this application is to allow patients of private practive clinics to schedule appointments, 
 write messages, and even video chat with their providers.
 
 This application consists of Authentication, Socket chats, webchats, and third party calendar implementation.
+
+
+## Technologies
 
 Technoogies used:  Express, EJS, Sequelize
 
@@ -37,7 +44,7 @@ Message: allows users to message with each other, primarily meant for doctor/pat
 Logout: user leaves session and is redirected to home page
 
 
-Integrated third party features:
+## Third-Party-Features
 
 Calendar: dhtmlxScheduler is a JavaScript event calendar that allows you to add a 
 Google-like scheduler to your web app or website. https://www.npmjs.com/package/dhtmlx-scheduler
