@@ -3,7 +3,6 @@
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
-* [Third Party Features] (#Third-Party-Features)
 * [Setup](#setup)
 
 
@@ -24,6 +23,17 @@ Four models are in use includeing: Chat, Appointment, Patient, and Doctor
 
 ![Data Models](https://i.imgur.com/VdzJmvh.png)
 
+Calendar: dhtmlxScheduler is a JavaScript event calendar that allows you to add a 
+Google-like scheduler to your web app or website. https://www.npmjs.com/package/dhtmlx-scheduler
+
+![Calendar](https://i.imgur.com/VRv3rRT.png)
+
+webRTC: PubNub IS the Signaling Protocol Service. Once signaling has taken place, video/audio/data is 
+streamed directly between clients, using WebRTC's PeerConnection API. This peer-to-peer direct connection 
+allows you to stream high-bandwidth robust data, such as video.
+
+
+## Setup
 
 Pages:
 
@@ -43,17 +53,6 @@ Message: allows users to message with each other, primarily meant for doctor/pat
          
 Logout: user leaves session and is redirected to home page
 
-
-## Third-Party-Features
-
-Calendar: dhtmlxScheduler is a JavaScript event calendar that allows you to add a 
-Google-like scheduler to your web app or website. https://www.npmjs.com/package/dhtmlx-scheduler
-
-![Calendar](https://i.imgur.com/VRv3rRT.png)
-
-webRTC: PubNub IS the Signaling Protocol Service. Once signaling has taken place, video/audio/data is 
-streamed directly between clients, using WebRTC's PeerConnection API. This peer-to-peer direct connection 
-allows you to stream high-bandwidth robust data, such as video.
 
 
 
